@@ -1,0 +1,55 @@
+name: Deploy to Devnet
+
+# NOTE: activates once the program lands under programs/bye_machine (the on-chain
+# design is a later phase). Rename the manifest path / program name below to
+# match the actual program(s).
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Install Agave CLI
+        run: |
+          sh -c "$(curl -sSfL https://release.anza.xyz/v4.0.3/install)"
+          echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+
+      - name: Check compilation
+        # Verifies the program compiles cleanly before committing build time.
+        # Integration tests connect to localnet and require a running
+        # solana-test-validator; they are run locally before pushing.
+        run: |
+          cargo check --features dev \
+            --manifest-path programs/bye_machine/Cargo.toml
+
+      - name: Build
+        # --arch v3 required (SIMD-0500 on devnet); --tools-version v1.54 for the
+        # sbpfv3 sysroot. `dev` only — never ship the `testing` feature.
+        run: |
+          cargo build-sbf --features dev --arch v3 --tools-version v1.54 \
+            --manifest-path programs/bye_machine/Cargo.toml
+
+      - name: Deploy
+        env:
+          DEPLOYER_KEYPAIR: ${{ secrets.DEPLOYER_KEYPAIR }}
+          PROGRAM_KEYPAIR: ${{ secrets.PROGRAM_KEYPAIR }}
+        run: |
+          echo "$DEPLOYER_KEYPAIR" > /tmp/deployer.json
+          mkdir -p target/deploy
+          echo "$PROGRAM_KEYPAIR" > target/deploy/bye_machine-keypair.json
+          solana config set --url devnet --keypair /tmp/deployer.json
+          solana program deploy target/deploy/bye_machine.so \
+            --program-id target/deploy/bye_machine-keypair.json
+          rm -f /tmp/deployer.json target/deploy/bye_machine-keypair.json

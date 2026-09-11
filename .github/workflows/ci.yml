@@ -1,0 +1,78 @@
+name: CI
+
+# Gate for the integration branches only — develop is left ungated so work-in-progress
+# pushes don't burn CI. The Rust steps are skipped while programs/ is empty (scaffold
+# phase) and start enforcing automatically once programs/bye_machine lands.
+
+on:
+  push:
+    branches: [staging, main]
+  pull_request:
+    branches: [staging, main]
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect program
+        id: detect
+        run: |
+          if [ -f programs/bye_machine/Cargo.toml ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::programs/bye_machine not present yet — skipping Rust checks (scaffold phase)."
+          fi
+
+      - name: Cache Cargo registry
+        if: steps.detect.outputs.present == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Install Rust toolchain
+        if: steps.detect.outputs.present == 'true'
+        run: rustup toolchain install 1.86.0 --profile minimal --component rustfmt,clippy
+
+      - name: Format check
+        if: steps.detect.outputs.present == 'true'
+        run: cargo +1.86.0 fmt --all --check
+
+      - name: Clippy
+        if: steps.detect.outputs.present == 'true'
+        run: cargo +1.86.0 clippy --all-targets --features dev -- -D warnings
+
+      - name: Unit tests
+        if: steps.detect.outputs.present == 'true'
+        run: cargo +1.86.0 test -p bye_machine
+
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.6.1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Type-check
+        run: pnpm run typecheck
+
+      - name: Validator-free tests
+        # Tests that need a running validator live in tests/integration and run
+        # locally (`pnpm run test:localnet`) or in the Docker stack.
+        run: pnpm test

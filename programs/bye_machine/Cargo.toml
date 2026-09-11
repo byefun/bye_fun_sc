@@ -1,0 +1,52 @@
+[package]
+name = "bye_machine"
+version = "0.1.0"
+description = "Solana program with MagicBlock VRF-backed randomness"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "bye_machine"
+
+[features]
+custom-heap = []
+custom-panic = []
+anchor-debug = []
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+prod = []
+dev = []
+testing = []
+
+[dependencies]
+anchor-lang = { version = "0.31.1", features = ["init-if-needed"] }
+anchor-spl = "0.31.1"
+bytemuck = { version = "1", features = ["min_const_generics"] }
+cfg-if = "1"
+solana-program = "2"
+mpl-token-metadata = "5"
+mpl-core = "0.11.1"
+# `PluginType::from_u8` — the derive that lets `core_asset.rs`'s plugin census see a byte no
+# variant in this build claims, instead of failing to parse it. Already in the tree as
+# `mpl-core`'s own dependency; named here because this crate calls it directly.
+num-traits = "0.2"
+
+# MagicBlock VRF. `commit_rolls` builds its request through this SDK and both roll-pipeline
+# accounts structs carry its macros. `anchor-compat` is load-bearing: the crate's own `anchor`
+# feature aliases `anchor-modern` -> `anchor-lang 1.0`, which does not typecheck against this
+# program's 0.31.1 (E0308 on every `Pubkey` crossing the boundary); `anchor-compat` selects
+# `anchor-lang >=0.28,<1.0` and resolves onto the one already in the tree. It carries a
+# non-optional `solana-program 3`, which the SBF build compiles alongside our own 2.x.
+ephemeral-vrf-sdk = { version = "=0.4.1", features = ["anchor-compat"] }
+
+# `borsh` itself is not re-exported by `mpl-token-metadata`, so `escrow.rs`'s unit tests need it
+# directly to serialize `MasterEdition`/`DeprecatedMasterEditionV1` fixtures byte-for-byte —
+# pinned to the same 0.10 line `mpl-token-metadata 5` itself depends on (`>= 0.9, < 1.0`).
+[dev-dependencies]
+borsh = "0.10"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

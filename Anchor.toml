@@ -1,0 +1,25 @@
+[toolchain]
+anchor_version = "0.31.1"
+
+[features]
+resolution = true
+skip-lint = false
+
+# Placeholder program ID bound to accounts/dev/bye_machine-keypair.json.
+# Keep these IDs in sync with docker-compose.yml, .github/workflows/deploy-devnet.yml,
+# and scripts/constants.ts.
+[programs.localnet]
+bye_machine = "4exRPJN7N8MVZh37efYAkwnGGxoJKMVUARQqf7awmYkJ"
+
+[programs.devnet]
+bye_machine = "4exRPJN7N8MVZh37efYAkwnGGxoJKMVUARQqf7awmYkJ"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "./accounts/dev/deployer.json"
+
+[scripts]
+test = "pnpm test"

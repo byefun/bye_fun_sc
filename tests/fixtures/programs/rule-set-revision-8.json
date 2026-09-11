@@ -1,0 +1,14 @@
+{
+  "pubkey": "Hd4z5EdEk6UTLZY85ZkW1rRpeFHcfsZ4whbHfqhGrcBt",
+  "account": {
+    "lamports": 10000000000,
+    "data": [
+      "AbUBAAAAAAAAAZQB3AAgzMY/WczfzOgkzIDMyczCVMyjfMzvW8yMEsy9zInMiS81byzM4jUtW8zKzPHM4My3zM28TWV0YXBsZXggRm91bmRhdGlvbiBSdWxlIFNldI63VHJhbnNmZXI6V2FsbGV0VG9XYWxsZXSkUGFzc65UcmFuc2ZlcjpPd25lcqRQYXNzulRyYW5zZmVyOk1pZ3JhdGlvbkRlbGVnYXRlpFBhc3O1VHJhbnNmZXI6U2FsZURlbGVnYXRlpFBhc3O5VHJhbnNmZXI6VHJhbnNmZXJEZWxlZ2F0ZaRQYXNzt0RlbGVnYXRlOkxvY2tlZFRyYW5zZmVypFBhc3OvRGVsZWdhdGU6VXBkYXRlpFBhc3OxRGVsZWdhdGU6VHJhbnNmZXKkUGFzc7BEZWxlZ2F0ZTpVdGlsaXR5pFBhc3OwRGVsZWdhdGU6U3Rha2luZ6RQYXNzskRlbGVnYXRlOkF1dGhvcml0eaRQYXNzs0RlbGVnYXRlOkNvbGxlY3Rpb26kUGFzc6xEZWxlZ2F0ZTpVc2WkUGFzc61EZWxlZ2F0ZTpTYWxlpFBhc3MBAQAAAAkAAAAAAAAA",
+      "base64"
+    ],
+    "owner": "auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg",
+    "executable": false,
+    "rentEpoch": 18446744073709551615,
+    "space": 450
+  }
+}

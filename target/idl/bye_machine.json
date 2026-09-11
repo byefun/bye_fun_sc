@@ -1,0 +1,6487 @@
+{
+  "address": "PROGRAMID",
+  "metadata": {
+    "name": "bye_machine",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "bye.fun — contributor-funded pool / gacha-ticket protocol"
+  },
+  "instructions": [
+    {
+      "name": "admit_collection",
+      "discriminator": [
+        105,
+        62,
+        17,
+        216,
+        239,
+        101,
+        90,
+        233
+      ],
+      "accounts": [
+        {
+          "name": "administrator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool_collection",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  108,
+                  108,
+                  101,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "arg",
+                "path": "collection"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "collection",
+          "type": "pubkey"
+        },
+        {
+          "name": "standards",
+          "type": "u8"
+        },
+        {
+          "name": "reason",
+          "type": {
+            "option": "u16"
+          }
+        }
+      ]
+    },
+    {
+      "name": "approve_deposit",
+      "discriminator": [
+        205,
+        226,
+        50,
+        240,
+        111,
+        38,
+        140,
+        183
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "weight_index",
+          "writable": true
+        },
+        {
+          "name": "top_tier",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  105,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet_stats",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  97,
+                  108,
+                  108,
+                  101,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.depositor",
+                "account": "Position"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "value",
+          "type": "u64"
+        },
+        {
+          "name": "observed_at",
+          "type": "i64"
+        },
+        {
+          "name": "lock_until",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "begin_sweep",
+      "discriminator": [
+        147,
+        244,
+        224,
+        21,
+        162,
+        70,
+        107,
+        89
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "claim_nft",
+      "discriminator": [
+        6,
+        193,
+        146,
+        120,
+        48,
+        218,
+        69,
+        33
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position.pool",
+                "account": "Position"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "nft_mint"
+        },
+        {
+          "name": "depositor_token",
+          "docs": [
+            "and checked against `depositor` by that same processor when it already exists."
+          ],
+          "writable": true
+        },
+        {
+          "name": "metadata",
+          "writable": true
+        },
+        {
+          "name": "master_edition"
+        },
+        {
+          "name": "position_token_record",
+          "docs": [
+            "present on standard 0 and absent on standard 1."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "depositor_token_record",
+          "docs": [
+            "the same terms as `position_token_record`."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "token_metadata_program",
+          "address": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+        },
+        {
+          "name": "authorization_rules_program",
+          "optional": true
+        },
+        {
+          "name": "authorization_rules",
+          "optional": true
+        },
+        {
+          "name": "sysvar_instructions",
+          "docs": [
+            "the same terms as the two token records — SPL `Transfer` has no CPI guard to read it."
+          ],
+          "optional": true,
+          "address": "Sysvar1nstructions1111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "claim_nft_core",
+      "discriminator": [
+        208,
+        1,
+        245,
+        197,
+        33,
+        232,
+        63,
+        53
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position.pool",
+                "account": "Position"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position_vault",
+          "docs": [
+            "`AssetV1.owner`. Derived here so Anchor pins the address the collateral gate reads against",
+            "and so the seeds the release signs under are this position's own. Never `init` and never",
+            "`mut`: there is nothing to allocate and nothing to write."
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "asset",
+          "docs": [
+            "make.** `read_collateral` reads whatever account it is handed, so without this address a",
+            "depositor could present a settleable asset of their own and claim against a position",
+            "whose card is elsewhere. Writable because `TransferV1` rewrites `AssetV1.owner`."
+          ],
+          "writable": true
+        },
+        {
+          "name": "collection",
+          "docs": [
+            "MPL Core needs the collection account present to run its plugins over the transfer."
+          ]
+        },
+        {
+          "name": "mpl_core_program",
+          "address": "CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_seized",
+      "discriminator": [
+        137,
+        244,
+        152,
+        67,
+        192,
+        164,
+        35,
+        72
+      ],
+      "accounts": [
+        {
+          "name": "caller",
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "weight_index",
+          "writable": true
+        },
+        {
+          "name": "top_tier",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  105,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet_stats",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  97,
+                  108,
+                  108,
+                  101,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.depositor",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position_vault",
+          "docs": [
+            "`AssetV1.owner`, which is precisely what the collateral read compares against. Derived",
+            "here so that comparison is against this position's own vault. Never `mut`: nothing signs",
+            "under these seeds here, because nothing is transferred."
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "asset",
+          "docs": [
+            "for itself.** `read_collateral` classifies whatever account it is handed, so without this",
+            "address a caller could present some unrelated burned asset and seize a position whose",
+            "card is safely escrowed. Not `mut`: this instruction reads the asset and never moves it."
+          ]
+        },
+        {
+          "name": "collection",
+          "docs": [
+            "`permanent_freeze_delegate` sits on either an asset or a collection, and this pool's live",
+            "one sits on the collection, held by a third party. Without this",
+            "account the seizure this instruction exists for is undetectable: the card is present,",
+            "vault-owned and unfrozen in its own registry, so the read would answer `Settleable` and",
+            "refuse to close a position whose card MPL Core will not move.",
+            "",
+            "**Pinned in the classification rather than here, and it has to be.** `Position` stores no",
+            "collection, so there is no stored address for `#[account(address = ..)]` to compare",
+            "against; the only truth is the asset's own `update_authority`, which is not readable at",
+            "account-validation time. `read_collateral` requires this account to be exactly that",
+            "collection before it walks the registry, which is what stops a caller naming any frozen",
+            "collection and seizing a healthy position with it. Never `mut`: read only, and no CPI.",
+            "",
+            "**The census walks this account's registry as well as the asset's**, so it is not only",
+            "where a freeze can hide — it is where a rejecting `Royalties` rule set or an external",
+            "adapter that declares a Transfer check can hide too, and either of those is what makes",
+            "the classification `Undecidable` rather than `Settleable`. A `Royalties` record whose",
+            "rule set is `None` hides nothing and is `Clear`: the live production collection carries",
+            "one, and reading it by plugin type rather than by rule set is what once put the whole",
+            "cohort on the undecidable arm."
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "commit_rolls",
+      "discriminator": [
+        175,
+        12,
+        204,
+        102,
+        216,
+        208,
+        187,
+        134
+      ],
+      "accounts": [
+        {
+          "name": "roller",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "top_tier",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  105,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "batch",
+          "docs": [
+            "Seeded on the pool's *pre-increment* counter, so the same roller committing twice in a",
+            "row cannot land on one address: `init` fails closed if the counter ever repeats."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  99,
+                  104
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "pool.batch_counter",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "roller_usdc",
+          "writable": true
+        },
+        {
+          "name": "principal_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  105,
+                  110,
+                  99,
+                  105,
+                  112,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "usdc_mint"
+        },
+        {
+          "name": "oracle_queue",
+          "docs": [
+            "request CPI — both the enqueued item and the 0.0005 SOL fee land here."
+          ],
+          "writable": true
+        },
+        {
+          "name": "program_identity",
+          "docs": [
+            "the program id across environments, and signs the request CPI."
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  100,
+                  101,
+                  110,
+                  116,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "vrf_program",
+          "address": "Vrf1RNUjXmQGjmQrQLvJHs9SNkvDJEsRVFPkfSQUwGz"
+        },
+        {
+          "name": "slot_hashes",
+          "address": "SysvarS1otHashes111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "n",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "deposit",
+      "discriminator": [
+        242,
+        35,
+        198,
+        137,
+        82,
+        225,
+        242,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool_collection",
+          "docs": [
+            "The admission record for the collection the presented asset declares. Its address is",
+            "re-derived in the handler from this pool's key and the collection the *asset's* metadata",
+            "names, so neither another pool's record for this collection nor this pool's record for",
+            "another collection is accepted."
+          ]
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "nft_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet_stats",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  97,
+                  108,
+                  108,
+                  101,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "depositor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "nft_mint"
+        },
+        {
+          "name": "depositor_token",
+          "writable": true
+        },
+        {
+          "name": "metadata",
+          "writable": true
+        },
+        {
+          "name": "master_edition"
+        },
+        {
+          "name": "depositor_token_record",
+          "docs": [
+            "present on standard 0 and absent on standard 1, which is a condition no account",
+            "constraint can express — the standard is not resolved until the handler reads the",
+            "metadata."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "position_token_record",
+          "docs": [
+            "the same terms as `depositor_token_record`."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "token_metadata_program",
+          "address": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+        },
+        {
+          "name": "authorization_rules_program",
+          "optional": true
+        },
+        {
+          "name": "authorization_rules",
+          "optional": true
+        },
+        {
+          "name": "sysvar_instructions",
+          "docs": [
+            "the same terms as the two token records — SPL `Transfer` has no CPI guard to read it."
+          ],
+          "optional": true,
+          "address": "Sysvar1nstructions1111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "deposit_core",
+      "discriminator": [
+        73,
+        114,
+        179,
+        123,
+        5,
+        111,
+        10,
+        65
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool_collection",
+          "docs": [
+            "The admission record for the collection the presented asset declares. Its address is",
+            "re-derived in the handler from this pool's key and the collection the *asset* names, so",
+            "neither another pool's record for this collection nor this pool's record for another",
+            "collection is accepted."
+          ]
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "asset"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position_vault",
+          "docs": [
+            "and yields the `vault_bump` the exit path signs with; it is deliberately never `init`,",
+            "because a Core asset needs no token account and allocating one would create rent nobody can",
+            "reclaim. Its only on-chain expression is `AssetV1.owner`.",
+            "",
+            "The sentence above names `vault_bump` in full on purpose: the crate-wide PDA-declaration",
+            "pin reads this struct's raw text, doc comments included, and counts the bare suffix."
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet_stats",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  97,
+                  108,
+                  108,
+                  101,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "depositor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "asset",
+          "docs": [
+            "handler then pins its owner to the depositor. Writable because `TransferV1` rewrites",
+            "`AssetV1.owner`."
+          ],
+          "writable": true
+        },
+        {
+          "name": "collection",
+          "docs": [
+            "collection the admission record was derived for."
+          ]
+        },
+        {
+          "name": "mpl_core_program",
+          "address": "CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "end_sweep",
+      "discriminator": [
+        242,
+        219,
+        250,
+        26,
+        62,
+        219,
+        162,
+        50
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "init_pool",
+      "discriminator": [
+        116,
+        233,
+        199,
+        204,
+        115,
+        159,
+        171,
+        36
+      ],
+      "accounts": [
+        {
+          "name": "administrator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "protocol_config.pool_counter",
+                "account": "ProtocolConfig"
+              }
+            ]
+          }
+        },
+        {
+          "name": "weight_index",
+          "writable": true
+        },
+        {
+          "name": "top_tier",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  105,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "principal_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  105,
+                  110,
+                  99,
+                  105,
+                  112,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury_04",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  48,
+                  52
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "usdc_mint"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": {
+              "name": "PoolConfigArgs"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_protocol",
+      "discriminator": [
+        3,
+        188,
+        141,
+        237,
+        225,
+        226,
+        232,
+        210
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": {
+              "name": "ProtocolConfigArgs"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "record_value",
+      "discriminator": [
+        216,
+        101,
+        103,
+        198,
+        176,
+        38,
+        208,
+        156
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "weight_index",
+          "writable": true
+        },
+        {
+          "name": "top_tier",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  105,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet_stats",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  97,
+                  108,
+                  108,
+                  101,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.depositor",
+                "account": "Position"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "value",
+          "type": "u64"
+        },
+        {
+          "name": "observed_at",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "reject_deposit",
+      "discriminator": [
+        29,
+        130,
+        68,
+        0,
+        27,
+        121,
+        47,
+        131
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position.pool",
+                "account": "Position"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "reason",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "return_rejected",
+      "discriminator": [
+        174,
+        230,
+        140,
+        164,
+        239,
+        212,
+        183,
+        103
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "depositor",
+          "writable": true
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position.pool",
+                "account": "Position"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "nft_mint"
+        },
+        {
+          "name": "depositor_token",
+          "docs": [
+            "and checked against `depositor` by that same processor when it already exists."
+          ],
+          "writable": true
+        },
+        {
+          "name": "metadata",
+          "writable": true
+        },
+        {
+          "name": "master_edition"
+        },
+        {
+          "name": "position_token_record",
+          "docs": [
+            "present on standard 0 and absent on standard 1."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "depositor_token_record",
+          "docs": [
+            "the same terms as `position_token_record`."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "token_metadata_program",
+          "address": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+        },
+        {
+          "name": "authorization_rules_program",
+          "optional": true
+        },
+        {
+          "name": "authorization_rules",
+          "optional": true
+        },
+        {
+          "name": "sysvar_instructions",
+          "docs": [
+            "the same terms as the two token records — SPL `Transfer` has no CPI guard to read it."
+          ],
+          "optional": true,
+          "address": "Sysvar1nstructions1111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "return_rejected_core",
+      "discriminator": [
+        103,
+        237,
+        35,
+        85,
+        44,
+        148,
+        241,
+        200
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "depositor",
+          "writable": true
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position.pool",
+                "account": "Position"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position_vault",
+          "docs": [
+            "`AssetV1.owner`. Derived here so Anchor pins the address the collateral gate reads against",
+            "and so the seeds the release signs under are this position's own. Never `init` and never",
+            "`mut`: there is nothing to allocate and nothing to write."
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "asset",
+          "docs": [
+            "make.** `read_collateral` reads whatever account it is handed, so without this address",
+            "the caller chooses which asset is tested — and a permissionless instruction would then",
+            "accept any settleable Core asset in place of a burned one. Writable because `TransferV1`",
+            "rewrites `AssetV1.owner`."
+          ],
+          "writable": true
+        },
+        {
+          "name": "collection",
+          "docs": [
+            "than here — `Position` stores no collection, so the only truth to compare against is the",
+            "asset's own `update_authority`, which account validation cannot read. The slot is always",
+            "present because MPL Core needs the account to run the collection's plugins over the",
+            "transfer; **what reaches the CPI is what the gate returns**, which is `None` for an asset",
+            "that declares no collection — a state `mpl-core 0.11.1` gives no way to reach, and one the",
+            "exits handle rather than assume away. On such an asset this account would be unread."
+          ]
+        },
+        {
+          "name": "mpl_core_program",
+          "address": "CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "set_authorities",
+      "discriminator": [
+        124,
+        254,
+        44,
+        240,
+        197,
+        70,
+        190,
+        107
+      ],
+      "accounts": [
+        {
+          "name": "signer",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "role",
+          "type": {
+            "defined": {
+              "name": "AuthorityRole"
+            }
+          }
+        },
+        {
+          "name": "new_authority",
+          "type": {
+            "option": "pubkey"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_pause",
+      "discriminator": [
+        63,
+        32,
+        154,
+        2,
+        56,
+        103,
+        79,
+        45
+      ],
+      "accounts": [
+        {
+          "name": "administrator",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "deposits",
+          "type": "bool"
+        },
+        {
+          "name": "rolls",
+          "type": "bool"
+        },
+        {
+          "name": "reason",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "update_config",
+      "discriminator": [
+        29,
+        158,
+        252,
+        191,
+        10,
+        83,
+        219,
+        99
+      ],
+      "accounts": [
+        {
+          "name": "administrator",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "top_tier",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  105,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "update",
+          "type": {
+            "defined": {
+              "name": "ConfigUpdate"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_tier",
+      "discriminator": [
+        22,
+        250,
+        234,
+        251,
+        201,
+        246,
+        98,
+        116
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "top_tier",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  105,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "update_vrf_config",
+      "discriminator": [
+        18,
+        151,
+        45,
+        135,
+        172,
+        226,
+        217,
+        25
+      ],
+      "accounts": [
+        {
+          "name": "administrator",
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "vrf_program",
+          "type": "pubkey"
+        },
+        {
+          "name": "oracle_queue",
+          "type": "pubkey"
+        },
+        {
+          "name": "swap_pool",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "vrf_callback",
+      "discriminator": [
+        248,
+        224,
+        55,
+        227,
+        56,
+        10,
+        108,
+        36
+      ],
+      "accounts": [
+        {
+          "name": "vrf_program_identity",
+          "docs": [
+            "Declared rather than left to `#[vrf_callback]` to inject, so the one signer is visible",
+            "in this file and to the crate-wide source pins — an injected field is invisible to them,",
+            "and a pinned body that omitted the signer would understate the very account surface the",
+            "pin exists to fix. The constraint is the SDK's own derivation, unchanged.",
+            "",
+            "The macro is kept even though this declaration leaves it nothing to inject: it is the",
+            "fail-safe. Delete this field and the macro puts the signer back; delete the macro too",
+            "and the callback becomes invocable by anyone, silently."
+          ],
+          "signer": true
+        },
+        {
+          "name": "batch",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  99,
+                  104
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "batch.pool",
+                "account": "RollBatch"
+              },
+              {
+                "kind": "account",
+                "path": "batch.batch_id",
+                "account": "RollBatch"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "randomness",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "withdraw",
+      "discriminator": [
+        183,
+        18,
+        70,
+        156,
+        148,
+        109,
+        161,
+        34
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "weight_index",
+          "writable": true
+        },
+        {
+          "name": "top_tier",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  105,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet_stats",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  97,
+                  108,
+                  108,
+                  101,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.depositor",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "principal_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  105,
+                  110,
+                  99,
+                  105,
+                  112,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "depositor_usdc",
+          "docs": [
+            "Optional so that withdrawal availability never depends on the depositor holding a USDC",
+            "account: the payout is structurally zero today, and requiring the destination to exist",
+            "for a transfer that never runs would gate an exit on something that has no permission to",
+            "gate it. Required the moment the payout is non-zero."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "position_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "nft_mint"
+        },
+        {
+          "name": "depositor_token",
+          "docs": [
+            "and checked against `depositor` by that same processor when it already exists."
+          ],
+          "writable": true
+        },
+        {
+          "name": "metadata",
+          "writable": true
+        },
+        {
+          "name": "master_edition"
+        },
+        {
+          "name": "position_token_record",
+          "docs": [
+            "present on standard 0 and absent on standard 1."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "depositor_token_record",
+          "docs": [
+            "the same terms as `position_token_record`."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "token_metadata_program",
+          "address": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+        },
+        {
+          "name": "authorization_rules_program",
+          "optional": true
+        },
+        {
+          "name": "authorization_rules",
+          "optional": true
+        },
+        {
+          "name": "sysvar_instructions",
+          "docs": [
+            "the same terms as the two token records — SPL `Transfer` has no CPI guard to read it."
+          ],
+          "optional": true,
+          "address": "Sysvar1nstructions1111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "withdraw_collection",
+      "discriminator": [
+        193,
+        70,
+        37,
+        202,
+        162,
+        164,
+        240,
+        111
+      ],
+      "accounts": [
+        {
+          "name": "administrator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "protocol_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool_collection",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  108,
+                  108,
+                  101,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "arg",
+                "path": "collection"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "collection",
+          "type": "pubkey"
+        },
+        {
+          "name": "reason",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "withdraw_core",
+      "discriminator": [
+        49,
+        97,
+        48,
+        114,
+        218,
+        116,
+        73,
+        96
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool.pool_id",
+                "account": "Pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.nft_mint",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "weight_index",
+          "writable": true
+        },
+        {
+          "name": "top_tier",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  105,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet_stats",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  119,
+                  97,
+                  108,
+                  108,
+                  101,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "position.depositor",
+                "account": "Position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "principal_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  105,
+                  110,
+                  99,
+                  105,
+                  112,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "depositor_usdc",
+          "docs": [
+            "Optional on exactly its principal's terms: the payout is structurally zero today, and",
+            "requiring a USDC account for a transfer that never runs would gate an exit on something",
+            "that has no permission to gate it. Required the moment the payout is non-zero."
+          ],
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "position_vault",
+          "docs": [
+            "`AssetV1.owner`. Derived here so Anchor pins the address the collateral gate reads against",
+            "and so the seeds the release signs under are this position's own. Never `init` and never",
+            "`mut`: there is nothing to allocate and nothing to write."
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position"
+              }
+            ]
+          }
+        },
+        {
+          "name": "asset",
+          "docs": [
+            "make.** `read_collateral` reads whatever account it is handed, so without this address a",
+            "depositor could present a settleable asset of their own and withdraw a position whose",
+            "card has been seized — taking the weight out and leaving the pool's own record of the",
+            "seizure unwritten. Writable because `TransferV1` rewrites `AssetV1.owner`."
+          ],
+          "writable": true
+        },
+        {
+          "name": "collection",
+          "docs": [
+            "MPL Core needs the collection account present to run its plugins over the transfer."
+          ]
+        },
+        {
+          "name": "mpl_core_program",
+          "address": "CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Pool",
+      "discriminator": [
+        241,
+        154,
+        109,
+        4,
+        17,
+        177,
+        109,
+        188
+      ]
+    },
+    {
+      "name": "PoolCollection",
+      "discriminator": [
+        58,
+        21,
+        72,
+        141,
+        119,
+        116,
+        163,
+        171
+      ]
+    },
+    {
+      "name": "Position",
+      "discriminator": [
+        170,
+        188,
+        143,
+        228,
+        122,
+        64,
+        247,
+        208
+      ]
+    },
+    {
+      "name": "ProtocolConfig",
+      "discriminator": [
+        207,
+        91,
+        250,
+        28,
+        152,
+        179,
+        215,
+        209
+      ]
+    },
+    {
+      "name": "RollBatch",
+      "discriminator": [
+        210,
+        230,
+        166,
+        244,
+        167,
+        0,
+        102,
+        143
+      ]
+    },
+    {
+      "name": "TopTier",
+      "discriminator": [
+        125,
+        120,
+        234,
+        158,
+        93,
+        21,
+        47,
+        75
+      ]
+    },
+    {
+      "name": "WalletStats",
+      "discriminator": [
+        96,
+        53,
+        96,
+        132,
+        136,
+        197,
+        236,
+        144
+      ]
+    },
+    {
+      "name": "WeightIndex",
+      "discriminator": [
+        162,
+        133,
+        99,
+        158,
+        244,
+        251,
+        171,
+        71
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "AcquiredActivated",
+      "discriminator": [
+        94,
+        238,
+        135,
+        53,
+        40,
+        127,
+        32,
+        202
+      ]
+    },
+    {
+      "name": "AuthorityRotated",
+      "discriminator": [
+        89,
+        124,
+        120,
+        223,
+        3,
+        19,
+        185,
+        230
+      ]
+    },
+    {
+      "name": "BatchClosed",
+      "discriminator": [
+        192,
+        76,
+        201,
+        211,
+        10,
+        212,
+        139,
+        232
+      ]
+    },
+    {
+      "name": "BatchCommitted",
+      "discriminator": [
+        25,
+        162,
+        27,
+        192,
+        130,
+        19,
+        134,
+        247
+      ]
+    },
+    {
+      "name": "BatchCompleted",
+      "discriminator": [
+        29,
+        223,
+        111,
+        148,
+        201,
+        240,
+        170,
+        51
+      ]
+    },
+    {
+      "name": "BatchRecovered",
+      "discriminator": [
+        137,
+        171,
+        97,
+        6,
+        141,
+        195,
+        135,
+        94
+      ]
+    },
+    {
+      "name": "BatchResolved",
+      "discriminator": [
+        50,
+        219,
+        86,
+        137,
+        199,
+        89,
+        41,
+        20
+      ]
+    },
+    {
+      "name": "BelowFloorClosed",
+      "discriminator": [
+        22,
+        109,
+        132,
+        240,
+        126,
+        52,
+        221,
+        82
+      ]
+    },
+    {
+      "name": "BelowFloorRetained",
+      "discriminator": [
+        132,
+        30,
+        203,
+        251,
+        103,
+        21,
+        187,
+        166
+      ]
+    },
+    {
+      "name": "CollectionAdmitted",
+      "discriminator": [
+        230,
+        4,
+        125,
+        175,
+        177,
+        169,
+        46,
+        116
+      ]
+    },
+    {
+      "name": "CollectionWithdrawn",
+      "discriminator": [
+        31,
+        153,
+        247,
+        156,
+        187,
+        21,
+        29,
+        112
+      ]
+    },
+    {
+      "name": "ConfigChanged",
+      "discriminator": [
+        147,
+        25,
+        86,
+        98,
+        98,
+        77,
+        78,
+        192
+      ]
+    },
+    {
+      "name": "DepositApproved",
+      "discriminator": [
+        229,
+        217,
+        230,
+        247,
+        42,
+        220,
+        160,
+        243
+      ]
+    },
+    {
+      "name": "DepositPending",
+      "discriminator": [
+        101,
+        208,
+        102,
+        93,
+        232,
+        105,
+        39,
+        35
+      ]
+    },
+    {
+      "name": "DepositRejected",
+      "discriminator": [
+        142,
+        2,
+        235,
+        2,
+        171,
+        247,
+        250,
+        10
+      ]
+    },
+    {
+      "name": "InstantSold",
+      "discriminator": [
+        127,
+        135,
+        201,
+        24,
+        249,
+        152,
+        241,
+        31
+      ]
+    },
+    {
+      "name": "NftClaimed",
+      "discriminator": [
+        4,
+        232,
+        63,
+        124,
+        139,
+        205,
+        168,
+        234
+      ]
+    },
+    {
+      "name": "NftReturned",
+      "discriminator": [
+        178,
+        221,
+        187,
+        172,
+        187,
+        206,
+        236,
+        229
+      ]
+    },
+    {
+      "name": "PauseSet",
+      "discriminator": [
+        175,
+        57,
+        198,
+        136,
+        192,
+        66,
+        204,
+        73
+      ]
+    },
+    {
+      "name": "PoolInitialized",
+      "discriminator": [
+        100,
+        118,
+        173,
+        87,
+        12,
+        198,
+        254,
+        229
+      ]
+    },
+    {
+      "name": "PositionSeized",
+      "discriminator": [
+        76,
+        35,
+        163,
+        227,
+        44,
+        199,
+        92,
+        129
+      ]
+    },
+    {
+      "name": "ProtocolInitialized",
+      "discriminator": [
+        173,
+        122,
+        168,
+        254,
+        9,
+        118,
+        76,
+        132
+      ]
+    },
+    {
+      "name": "RebalanceEvaluated",
+      "discriminator": [
+        122,
+        52,
+        229,
+        120,
+        7,
+        239,
+        128,
+        112
+      ]
+    },
+    {
+      "name": "RollRefunded",
+      "discriminator": [
+        85,
+        229,
+        93,
+        229,
+        185,
+        248,
+        242,
+        193
+      ]
+    },
+    {
+      "name": "RollSettled",
+      "discriminator": [
+        198,
+        145,
+        24,
+        65,
+        235,
+        178,
+        45,
+        192
+      ]
+    },
+    {
+      "name": "SweepBegun",
+      "discriminator": [
+        160,
+        229,
+        165,
+        59,
+        13,
+        136,
+        66,
+        145
+      ]
+    },
+    {
+      "name": "SweepEnded",
+      "discriminator": [
+        205,
+        223,
+        178,
+        214,
+        13,
+        11,
+        22,
+        111
+      ]
+    },
+    {
+      "name": "T04CeilingOverflow",
+      "discriminator": [
+        175,
+        48,
+        91,
+        182,
+        51,
+        24,
+        230,
+        69
+      ]
+    },
+    {
+      "name": "TierChanged",
+      "discriminator": [
+        126,
+        9,
+        150,
+        127,
+        199,
+        123,
+        136,
+        1
+      ]
+    },
+    {
+      "name": "ValueRecorded",
+      "discriminator": [
+        199,
+        217,
+        250,
+        231,
+        39,
+        89,
+        141,
+        173
+      ]
+    },
+    {
+      "name": "VrfConfigChanged",
+      "discriminator": [
+        243,
+        134,
+        255,
+        254,
+        88,
+        136,
+        225,
+        211
+      ]
+    },
+    {
+      "name": "Withdrawn",
+      "discriminator": [
+        20,
+        89,
+        223,
+        198,
+        194,
+        124,
+        219,
+        13
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6100,
+      "name": "CollectionNotAdmitted",
+      "msg": "No admission record exists for this collection in this pool"
+    },
+    {
+      "code": 6101,
+      "name": "StandardNotAdmitted",
+      "msg": "Token standard is not one this program admits"
+    },
+    {
+      "code": 6102,
+      "name": "CompressedAssetNotSupported",
+      "msg": "Compressed assets are not accepted"
+    },
+    {
+      "code": 6103,
+      "name": "DepositAlreadyPending",
+      "msg": "A pending deposit already exists for this NFT"
+    },
+    {
+      "code": 6104,
+      "name": "BelowAdmissionFloor",
+      "msg": "Value is below the pool's admission floor"
+    },
+    {
+      "code": 6105,
+      "name": "AboveAdmissionCeiling",
+      "msg": "Value exceeds the pool's admission ceiling"
+    },
+    {
+      "code": 6106,
+      "name": "WalletValueCapExceeded",
+      "msg": "Deposit would exceed this wallet's value cap"
+    },
+    {
+      "code": 6107,
+      "name": "DepositsPaused",
+      "msg": "Deposits are currently paused"
+    },
+    {
+      "code": 6108,
+      "name": "StandardNotAdmittedForCollection",
+      "msg": "This collection is not admitted for the presented asset's token standard"
+    },
+    {
+      "code": 6200,
+      "name": "RollBatchInFlight",
+      "msg": "An open roll batch must resolve before this action"
+    },
+    {
+      "code": 6201,
+      "name": "RollsPaused",
+      "msg": "Rolls are currently paused"
+    },
+    {
+      "code": 6202,
+      "name": "SweepPending",
+      "msg": "A value sweep is pending — it must close before rolls are committed"
+    },
+    {
+      "code": 6203,
+      "name": "RollCountOutOfBounds",
+      "msg": "Roll count must be between 1 and the pool's max N"
+    },
+    {
+      "code": 6204,
+      "name": "RealPoolEmpty",
+      "msg": "The pool holds no real card to draw against"
+    },
+    {
+      "code": 6205,
+      "name": "RollOutOfOrder",
+      "msg": "Rolls settle in index order and this is not the next one"
+    },
+    {
+      "code": 6206,
+      "name": "BatchNotResolved",
+      "msg": "Batch randomness has not been delivered yet"
+    },
+    {
+      "code": 6207,
+      "name": "TierNotFull",
+      "msg": "Tier holds fewer members than the pool's real cards require"
+    },
+    {
+      "code": 6208,
+      "name": "RecoveryTimeoutNotElapsed",
+      "msg": "The batch's recovery timeout has not elapsed"
+    },
+    {
+      "code": 6209,
+      "name": "QueueItemStillPresent",
+      "msg": "The batch's VRF queue item is still present — purge it again, then retry"
+    },
+    {
+      "code": 6210,
+      "name": "BatchPoolMismatch",
+      "msg": "Supplied batch belongs to a different pool"
+    },
+    {
+      "code": 6300,
+      "name": "PositionLocked",
+      "msg": "Position is locked until a later time"
+    },
+    {
+      "code": 6301,
+      "name": "InvalidPositionState",
+      "msg": "Position is not in the required state for this action"
+    },
+    {
+      "code": 6302,
+      "name": "NotPositionOwner",
+      "msg": "Signer is not this position's depositor"
+    },
+    {
+      "code": 6303,
+      "name": "TreasuryPositionNotEligible",
+      "msg": "Treasury-acquired positions are activated only by activate_acquired"
+    },
+    {
+      "code": 6304,
+      "name": "PositionPoolMismatch",
+      "msg": "Supplied position belongs to a different pool"
+    },
+    {
+      "code": 6305,
+      "name": "CandidateOutranked",
+      "msg": "Candidate does not outrank the tier's lowest member"
+    },
+    {
+      "code": 6306,
+      "name": "WrongStandardForInstruction",
+      "msg": "This instruction does not serve the position's stored token standard"
+    },
+    {
+      "code": 6307,
+      "name": "CollateralAbsent",
+      "msg": "Escrowed collateral is gone — call close_seized"
+    },
+    {
+      "code": 6308,
+      "name": "CollateralPresent",
+      "msg": "Escrowed collateral is still in the vault — there is nothing to close"
+    },
+    {
+      "code": 6309,
+      "name": "CollateralFrozen",
+      "msg": "Escrowed collateral is frozen and cannot be transferred — call close_seized"
+    },
+    {
+      "code": 6400,
+      "name": "PositionNotPending",
+      "msg": "Position is not in the Pending state"
+    },
+    {
+      "code": 6401,
+      "name": "ZeroValue",
+      "msg": "Recorded value must be greater than zero"
+    },
+    {
+      "code": 6402,
+      "name": "SweepNotOpen",
+      "msg": "A value sweep must be open for this action"
+    },
+    {
+      "code": 6403,
+      "name": "LockedDeactivationRejected",
+      "msg": "Position is locked and cannot be deactivated below the admission floor"
+    },
+    {
+      "code": 6404,
+      "name": "SweepAlreadyOpen",
+      "msg": "A value sweep is already open"
+    },
+    {
+      "code": 6500,
+      "name": "AdmissionFloorNotAboveTicket",
+      "msg": "Admission floor must remain above the ticket target"
+    },
+    {
+      "code": 6501,
+      "name": "AllocationBpsNotFullyAllocated",
+      "msg": "Allocation basis points must sum to 10,000"
+    },
+    {
+      "code": 6502,
+      "name": "BlankFaceNotBelowTicket",
+      "msg": "Every blank face value must stay below the ticket target"
+    },
+    {
+      "code": 6503,
+      "name": "Unauthorized",
+      "msg": "Signer is not authorized for this action"
+    },
+    {
+      "code": 6504,
+      "name": "TierSizeOutOfBounds",
+      "msg": "Tier size must be between 1 and 20"
+    },
+    {
+      "code": 6505,
+      "name": "FeeNotPriceMinusTicket",
+      "msg": "Fee must equal price minus ticket target"
+    },
+    {
+      "code": 6506,
+      "name": "MaxNOutOfBounds",
+      "msg": "Max N must be between 1 and 10"
+    },
+    {
+      "code": 6507,
+      "name": "StandardsMaskInvalid",
+      "msg": "Admitted standards must name at least one supported standard and no other bit"
+    },
+    {
+      "code": 6508,
+      "name": "StandardsUpdateNoOp",
+      "msg": "Admitted standards already hold this value"
+    },
+    {
+      "code": 6509,
+      "name": "NarrowingReasonRequired",
+      "msg": "Clearing an admitted standard requires a reason"
+    },
+    {
+      "code": 6510,
+      "name": "ReasonNotApplicable",
+      "msg": "A reason is meaningless when no admitted standard is cleared"
+    },
+    {
+      "code": 6511,
+      "name": "BlankFaceZero",
+      "msg": "Every blank face value must be greater than zero"
+    },
+    {
+      "code": 6600,
+      "name": "PrincipalShortfall",
+      "msg": "Principal vault does not cover this batch's roll liability"
+    },
+    {
+      "code": 6601,
+      "name": "T04Shortfall",
+      "msg": "T04 does not cover the amount owed"
+    },
+    {
+      "code": 6602,
+      "name": "T03Shortfall",
+      "msg": "T03 does not cover the amount owed"
+    },
+    {
+      "code": 6603,
+      "name": "SlippageExceeded",
+      "msg": "Swap slippage exceeds the configured maximum"
+    },
+    {
+      "code": 6700,
+      "name": "WeightDesync",
+      "msg": "Weight index total does not match the pool's aggregate weight"
+    },
+    {
+      "code": 6701,
+      "name": "WeightIndexFull",
+      "msg": "Weight index has no free or unallocated slots left"
+    },
+    {
+      "code": 6702,
+      "name": "WeightIndexNotBlank",
+      "msg": "Weight index account is not a blank, correctly sized, program-owned account"
+    },
+    {
+      "code": 6703,
+      "name": "ArithmeticFailure",
+      "msg": "Checked arithmetic failed or produced a degenerate result"
+    }
+  ],
+  "types": [
+    {
+      "name": "AcquiredActivated",
+      "docs": [
+        "A treasury-acquired position entering the pool.",
+        "",
+        "**Deliberately not a reuse of `DepositApproved`**: no attestation happens at activation. The",
+        "`value` and `observed_at` were attested when the card was bought and are only read back here,",
+        "so an approval event would record a value decision nobody made.",
+        "",
+        "`observed_age_seconds` is `Clock.unix_timestamp − observed_at` in **seconds, not slots**, and",
+        "it is carried because the gap between attestation and activation is unbounded — this is the",
+        "field that makes that gap measurable rather than inferred."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "value",
+            "type": "u64"
+          },
+          {
+            "name": "observed_at",
+            "type": "i64"
+          },
+          {
+            "name": "observed_age_seconds",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AuthorityRole",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Administrator"
+          },
+          {
+            "name": "Operator"
+          },
+          {
+            "name": "T03"
+          },
+          {
+            "name": "T02"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AuthorityRotated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "role",
+            "type": {
+              "defined": {
+                "name": "AuthorityRole"
+              }
+            }
+          },
+          {
+            "name": "old",
+            "type": "pubkey"
+          },
+          {
+            "name": "new",
+            "type": "pubkey"
+          },
+          {
+            "name": "phase",
+            "type": {
+              "defined": {
+                "name": "RotationPhase"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BatchClosed",
+      "docs": [
+        "A settled or recovered batch's account closed and its rent returned. Nothing records the batch",
+        "after this, so the event is the only surviving statement that it existed and where its rent",
+        "went."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "batch",
+            "type": "pubkey"
+          },
+          {
+            "name": "rent_recipient",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BatchCommitted",
+      "docs": [
+        "A batch's commitment, carrying the priced terms it will settle on.",
+        "",
+        "The five `s_*` fields are the snapshot the batch settles against no matter what a later",
+        "`update_config` does, and they are published here because a third party auditing a settlement",
+        "must read the terms that priced it rather than the pool's current ones. The set is the priced",
+        "terms **only** — the tier accrual denominator and Treasury 04's ceiling are read live at",
+        "settlement, so neither is snapshotted and neither belongs here."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "roller",
+            "type": "pubkey"
+          },
+          {
+            "name": "batch",
+            "type": "pubkey"
+          },
+          {
+            "name": "n",
+            "type": "u8"
+          },
+          {
+            "name": "s_price",
+            "type": "u64"
+          },
+          {
+            "name": "s_ticket",
+            "type": "u64"
+          },
+          {
+            "name": "s_fee",
+            "type": "u64"
+          },
+          {
+            "name": "s_alloc_bps",
+            "type": {
+              "array": [
+                "u16",
+                3
+              ]
+            }
+          },
+          {
+            "name": "s_blank_faces",
+            "type": {
+              "array": [
+                "u64",
+                3
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BatchCompleted",
+      "docs": [
+        "A batch reaching its last roll, releasing the actions gated on an open batch.",
+        "",
+        "`open_batches_remaining` is the count **after** the decrement. Batches serialize, so it always",
+        "reads zero and a completion always reopens the pool; it is carried so a watcher reads the",
+        "reopening off the event rather than reconstructing the count across events."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "batch",
+            "type": "pubkey"
+          },
+          {
+            "name": "open_batches_remaining",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BatchRecovered",
+      "docs": [
+        "A batch whose randomness never arrived, recovered after its timeout. `wallet` is what makes",
+        "per-wallet timeout rates computable, which is the anomaly signal that stands in for preventing",
+        "a withheld callback.",
+        "",
+        "`open_batches_remaining` is the post-decrement count, carried for the same reason",
+        "[`BatchCompleted`] carries it — recovery is the other instruction that decrements it."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "batch",
+            "type": "pubkey"
+          },
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "open_batches_remaining",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BatchResolved",
+      "docs": [
+        "Randomness delivered for a batch. Carries no result of its own — it is the anchor an indexer",
+        "replays a batch's settlements forward from, which is why it names the batch even though the",
+        "callback writes only `randomness` and the state transition."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "batch",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BatchState",
+      "docs": [
+        "Where a batch sits in its lifecycle (SM-03).",
+        "",
+        "**Declaration order is the borsh wire byte**, not an implementation detail: a fieldless enum",
+        "serializes as its declaration index, so reordering these variants silently reinterprets every",
+        "already-written `RollBatch` and every client decode. Append only."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Committed"
+          },
+          {
+            "name": "Resolved"
+          },
+          {
+            "name": "Recovered"
+          },
+          {
+            "name": "Complete"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BelowFloorClosed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "depositor",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BelowFloorRetained",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "lock_until",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CollectionAdmitted",
+      "docs": [
+        "`old_standards` is `0` on a creation, so one event type covers both admitting a collection and",
+        "re-standarding an admitted one. `reason` is `Some` **exactly** when the update cleared a bit,",
+        "which is what puts the motive on chain rather than only at the instruction boundary."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "collection",
+            "type": "pubkey"
+          },
+          {
+            "name": "standards",
+            "type": "u8"
+          },
+          {
+            "name": "old_standards",
+            "type": "u8"
+          },
+          {
+            "name": "reason",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CollectionWithdrawn",
+      "docs": [
+        "Carries the withdrawn `standards` because nothing else survives the close: afterwards no",
+        "account records that this collection was ever admitted or what it permitted, so the admitted",
+        "set at any slot is reconstructible from events alone or not at all."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "collection",
+            "type": "pubkey"
+          },
+          {
+            "name": "standards",
+            "type": "u8"
+          },
+          {
+            "name": "reason",
+            "type": "u16"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ConfigChanged",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "param",
+            "type": "string"
+          },
+          {
+            "name": "old",
+            "type": {
+              "defined": {
+                "name": "ConfigValue"
+              }
+            }
+          },
+          {
+            "name": "new",
+            "type": {
+              "defined": {
+                "name": "ConfigValue"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ConfigUpdate",
+      "docs": [
+        "One configuration move. Independent parameters are scalar variants; the three coupled",
+        "surfaces are composites validated as a unit, since `fee == price - ticket_target`, the",
+        "10,000 allocation sum and the face array cannot be satisfied one parameter at a time."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "AdmissionFloor",
+            "fields": [
+              "u64"
+            ]
+          },
+          {
+            "name": "AdmissionCeiling",
+            "fields": [
+              "u64"
+            ]
+          },
+          {
+            "name": "WalletValueCap",
+            "fields": [
+              "u64"
+            ]
+          },
+          {
+            "name": "MaxN",
+            "fields": [
+              "u8"
+            ]
+          },
+          {
+            "name": "BuybackRateBps",
+            "fields": [
+              "u16"
+            ]
+          },
+          {
+            "name": "T04Ceiling",
+            "fields": [
+              "u64"
+            ]
+          },
+          {
+            "name": "SweepCadenceHours",
+            "fields": [
+              "u16"
+            ]
+          },
+          {
+            "name": "TierSize",
+            "fields": [
+              "u8"
+            ]
+          },
+          {
+            "name": "Pricing",
+            "fields": [
+              {
+                "name": "price",
+                "type": "u64"
+              },
+              {
+                "name": "ticket_target",
+                "type": "u64"
+              },
+              {
+                "name": "fee",
+                "type": "u64"
+              }
+            ]
+          },
+          {
+            "name": "Allocation",
+            "fields": [
+              {
+                "name": "equal_bps",
+                "type": "u16"
+              },
+              {
+                "name": "tier_bps",
+                "type": "u16"
+              },
+              {
+                "name": "protocol_bps",
+                "type": "u16"
+              }
+            ]
+          },
+          {
+            "name": "BlankFaces",
+            "fields": [
+              {
+                "array": [
+                  "u64",
+                  3
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ConfigValue",
+      "docs": [
+        "A single scalar `Pool`/`ProtocolConfig` field value, old or new, as carried by `ConfigChanged`."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Amount",
+            "fields": [
+              "u64"
+            ]
+          },
+          {
+            "name": "Bps",
+            "fields": [
+              "u16"
+            ]
+          },
+          {
+            "name": "Count",
+            "fields": [
+              "u8"
+            ]
+          },
+          {
+            "name": "Faces",
+            "fields": [
+              {
+                "array": [
+                  "u64",
+                  3
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Hours",
+            "fields": [
+              "u16"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DepositApproved",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "value",
+            "type": "u64"
+          },
+          {
+            "name": "observed_at",
+            "type": "i64"
+          },
+          {
+            "name": "observed_age_seconds",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DepositPending",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "depositor",
+            "type": "pubkey"
+          },
+          {
+            "name": "nft_mint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DepositRejected",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "reason",
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InstantSold",
+      "docs": [
+        "The treasury buying a card off a holder at the live buyback rate.",
+        "",
+        "**`observed_at` is carried because the attestation is not consumed here.** It is persisted and",
+        "read back later by the activation, so without the timestamp on this event there is no way to",
+        "audit after the fact how old the observation was that the pool eventually activated on;",
+        "`observed_age_seconds` at acceptance is carried too, so the acceptance-time and",
+        "activation-time ages can be compared directly rather than reconstructed.",
+        "",
+        "`standard` is **appended last**, so no existing field's wire offset moves. This event and",
+        "`DepositPending` are the only two that carry the discriminant: those are the points where the",
+        "value is derived, nothing rewrites it afterwards, and they are the two an indexer sources it",
+        "from when it inserts the position row."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "seller",
+            "type": "pubkey"
+          },
+          {
+            "name": "value",
+            "type": "u64"
+          },
+          {
+            "name": "observed_at",
+            "type": "i64"
+          },
+          {
+            "name": "observed_age_seconds",
+            "type": "i64"
+          },
+          {
+            "name": "rate_bps",
+            "type": "u16"
+          },
+          {
+            "name": "paid",
+            "type": "u64"
+          },
+          {
+            "name": "standard",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "NftClaimed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "depositor",
+            "type": "pubkey"
+          },
+          {
+            "name": "nft_mint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "NftReturned",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "depositor",
+            "type": "pubkey"
+          },
+          {
+            "name": "nft_mint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PauseSet",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "deposits_paused",
+            "type": "bool"
+          },
+          {
+            "name": "rolls_paused",
+            "type": "bool"
+          },
+          {
+            "name": "reason",
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pool",
+      "docs": [
+        "A single pool's config, live counters, and accrual state. Seeds:",
+        "`[POOL_SEED, pool_id: u16 le]`. The `Pool` PDA also signs as its own vaults'",
+        "transfer authority."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool_id",
+            "type": "u16"
+          },
+          {
+            "name": "weight_index",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury_03",
+            "type": "pubkey"
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          },
+          {
+            "name": "ticket_target",
+            "type": "u64"
+          },
+          {
+            "name": "fee",
+            "type": "u64"
+          },
+          {
+            "name": "alloc_equal_bps",
+            "type": "u16"
+          },
+          {
+            "name": "alloc_tier_bps",
+            "type": "u16"
+          },
+          {
+            "name": "alloc_protocol_bps",
+            "type": "u16"
+          },
+          {
+            "name": "admission_floor",
+            "type": "u64"
+          },
+          {
+            "name": "admission_ceiling",
+            "type": "u64"
+          },
+          {
+            "name": "wallet_value_cap",
+            "type": "u64"
+          },
+          {
+            "name": "max_n",
+            "type": "u8"
+          },
+          {
+            "name": "buyback_rate_bps",
+            "type": "u16"
+          },
+          {
+            "name": "blank_faces",
+            "type": {
+              "array": [
+                "u64",
+                3
+              ]
+            }
+          },
+          {
+            "name": "t04_ceiling",
+            "type": "u64"
+          },
+          {
+            "name": "sweep_cadence_hours",
+            "type": "u16"
+          },
+          {
+            "name": "tier_size",
+            "type": "u8"
+          },
+          {
+            "name": "deposits_paused",
+            "type": "bool"
+          },
+          {
+            "name": "rolls_paused",
+            "type": "bool"
+          },
+          {
+            "name": "pause_reason",
+            "type": "u16"
+          },
+          {
+            "name": "n_real",
+            "type": "u32"
+          },
+          {
+            "name": "blanks",
+            "type": {
+              "array": [
+                "u32",
+                3
+              ]
+            }
+          },
+          {
+            "name": "w_real",
+            "type": "u128"
+          },
+          {
+            "name": "open_batches",
+            "type": "u32"
+          },
+          {
+            "name": "batch_counter",
+            "type": "u64"
+          },
+          {
+            "name": "position_counter",
+            "type": "u64"
+          },
+          {
+            "name": "pending_roll_liability",
+            "type": "u64"
+          },
+          {
+            "name": "owed_fees",
+            "type": "u64"
+          },
+          {
+            "name": "acc_equal",
+            "type": "u128"
+          },
+          {
+            "name": "sweep_pending",
+            "type": "bool"
+          },
+          {
+            "name": "sweep_epoch",
+            "type": "u64"
+          },
+          {
+            "name": "last_sweep_at",
+            "type": "i64"
+          },
+          {
+            "name": "sweep_updates",
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolCollection",
+      "docs": [
+        "One admitted collection's record. Seeds: `[COLLECTION_SEED, pool, collection]`.",
+        "",
+        "`collection` is the address read out of the presented asset itself, never a caller argument,",
+        "so seeding on it makes both a substituted record and a duplicate record for one collection",
+        "structurally impossible. `standards` is the bitmask from `common::standards`; the record",
+        "admits a collection *for* a set of standards, and a bit cleared today cannot reach a card",
+        "admitted yesterday because `Position.standard` is written once at intake and never re-read",
+        "from here."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "collection",
+            "type": "pubkey"
+          },
+          {
+            "name": "standards",
+            "type": "u8"
+          },
+          {
+            "name": "admitted_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolConfigArgs",
+      "docs": [
+        "The genesis config a pool is created with — every parameter that lives on `Pool`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "treasury_03",
+            "type": "pubkey"
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          },
+          {
+            "name": "ticket_target",
+            "type": "u64"
+          },
+          {
+            "name": "fee",
+            "type": "u64"
+          },
+          {
+            "name": "alloc_equal_bps",
+            "type": "u16"
+          },
+          {
+            "name": "alloc_tier_bps",
+            "type": "u16"
+          },
+          {
+            "name": "alloc_protocol_bps",
+            "type": "u16"
+          },
+          {
+            "name": "admission_floor",
+            "type": "u64"
+          },
+          {
+            "name": "admission_ceiling",
+            "type": "u64"
+          },
+          {
+            "name": "wallet_value_cap",
+            "type": "u64"
+          },
+          {
+            "name": "max_n",
+            "type": "u8"
+          },
+          {
+            "name": "buyback_rate_bps",
+            "type": "u16"
+          },
+          {
+            "name": "blank_faces",
+            "type": {
+              "array": [
+                "u64",
+                3
+              ]
+            }
+          },
+          {
+            "name": "t04_ceiling",
+            "type": "u64"
+          },
+          {
+            "name": "sweep_cadence_hours",
+            "type": "u16"
+          },
+          {
+            "name": "tier_size",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolInitialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "pool_id",
+            "type": "u16"
+          },
+          {
+            "name": "weight_index",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury_03",
+            "type": "pubkey"
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          },
+          {
+            "name": "ticket_target",
+            "type": "u64"
+          },
+          {
+            "name": "fee",
+            "type": "u64"
+          },
+          {
+            "name": "alloc_equal_bps",
+            "type": "u16"
+          },
+          {
+            "name": "alloc_tier_bps",
+            "type": "u16"
+          },
+          {
+            "name": "alloc_protocol_bps",
+            "type": "u16"
+          },
+          {
+            "name": "admission_floor",
+            "type": "u64"
+          },
+          {
+            "name": "admission_ceiling",
+            "type": "u64"
+          },
+          {
+            "name": "wallet_value_cap",
+            "type": "u64"
+          },
+          {
+            "name": "max_n",
+            "type": "u8"
+          },
+          {
+            "name": "buyback_rate_bps",
+            "type": "u16"
+          },
+          {
+            "name": "blank_faces",
+            "type": {
+              "array": [
+                "u64",
+                3
+              ]
+            }
+          },
+          {
+            "name": "t04_ceiling",
+            "type": "u64"
+          },
+          {
+            "name": "sweep_cadence_hours",
+            "type": "u16"
+          },
+          {
+            "name": "tier_size",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Position",
+      "docs": [
+        "One deposited NFT's custody + accrual record. Seeds:",
+        "`[POSITION_SEED, pool, nft_mint]`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "depositor",
+            "type": "pubkey"
+          },
+          {
+            "name": "nft_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "position_id",
+            "type": "u64"
+          },
+          {
+            "name": "state",
+            "type": {
+              "defined": {
+                "name": "PositionState"
+              }
+            }
+          },
+          {
+            "name": "recorded_value",
+            "type": "u64"
+          },
+          {
+            "name": "value_observed_at",
+            "type": "i64"
+          },
+          {
+            "name": "deposit_value",
+            "type": "u64"
+          },
+          {
+            "name": "slot_index",
+            "type": "u32"
+          },
+          {
+            "name": "activated_at",
+            "type": "i64"
+          },
+          {
+            "name": "equal_checkpoint",
+            "type": "u128"
+          },
+          {
+            "name": "accrued",
+            "type": "u64"
+          },
+          {
+            "name": "in_tier",
+            "type": "bool"
+          },
+          {
+            "name": "tier_checkpoint",
+            "type": "u128"
+          },
+          {
+            "name": "lock_until",
+            "type": "i64"
+          },
+          {
+            "name": "reject_reason",
+            "type": "u16"
+          },
+          {
+            "name": "standard",
+            "docs": [
+              "Custody dispatch: 0 pNFT, 1 legacy `V1_NFT`, 2 MPL Core. Derived at intake from the",
+              "presented asset account's **owner program** and — on the Token Metadata branch, where one",
+              "owner program covers two standards — from `Metadata.token_standard` against a closed set,",
+              "then written once and never taken as an instruction argument: a caller-supplied",
+              "discriminant would let a depositor pick the weaker transfer path for a stronger asset."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "vault_bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PositionSeized",
+      "docs": [
+        "A third party ending custody — the only position closure no bye.fun instruction initiates, and",
+        "the reason it must be logged at all: an unlogged one is indistinguishable from a bug.",
+        "",
+        "`source_state` is on the event because it is the only way an indexer can tell which of",
+        "`close_seized`'s three effect sets ran. `owner_observed` is what the asset's `owner` read as at",
+        "the time, which on a transfer-out names the destination and on a burn or freeze does not."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "kind",
+            "type": {
+              "defined": {
+                "name": "SeizureKind"
+              }
+            }
+          },
+          {
+            "name": "owner_observed",
+            "type": "pubkey"
+          },
+          {
+            "name": "source_state",
+            "type": {
+              "defined": {
+                "name": "PositionState"
+              }
+            }
+          },
+          {
+            "name": "recorded_value",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PositionState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Active"
+          },
+          {
+            "name": "ClosedBelowFloor"
+          },
+          {
+            "name": "Rejected"
+          },
+          {
+            "name": "Seized"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProtocolConfig",
+      "docs": [
+        "Singleton protocol-wide configuration. Seeds: `[PROTOCOL_CONFIG_SEED]`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "administrator",
+            "type": "pubkey"
+          },
+          {
+            "name": "pending_administrator",
+            "type": "pubkey"
+          },
+          {
+            "name": "pending_operator",
+            "type": "pubkey"
+          },
+          {
+            "name": "pending_t03_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "pending_t02_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "operator",
+            "type": "pubkey"
+          },
+          {
+            "name": "t03_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "t02_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "protocol_revenue",
+            "type": "pubkey"
+          },
+          {
+            "name": "usdc_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "bye_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "vrf_program",
+            "type": "pubkey"
+          },
+          {
+            "name": "oracle_queue",
+            "type": "pubkey"
+          },
+          {
+            "name": "swap_pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "max_swap_slippage_bps",
+            "type": "u16"
+          },
+          {
+            "name": "pool_counter",
+            "type": "u16"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProtocolConfigArgs",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "operator",
+            "type": "pubkey"
+          },
+          {
+            "name": "t03_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "t02_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "protocol_revenue",
+            "type": "pubkey"
+          },
+          {
+            "name": "usdc_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "bye_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "vrf_program",
+            "type": "pubkey"
+          },
+          {
+            "name": "oracle_queue",
+            "type": "pubkey"
+          },
+          {
+            "name": "swap_pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "max_swap_slippage_bps",
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProtocolInitialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "administrator",
+            "type": "pubkey"
+          },
+          {
+            "name": "operator",
+            "type": "pubkey"
+          },
+          {
+            "name": "t02_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "t03_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "protocol_revenue",
+            "type": "pubkey"
+          },
+          {
+            "name": "usdc_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "bye_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "vrf_program",
+            "type": "pubkey"
+          },
+          {
+            "name": "oracle_queue",
+            "type": "pubkey"
+          },
+          {
+            "name": "swap_pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "max_swap_slippage_bps",
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RebalanceEvaluated",
+      "docs": [
+        "The rebalance evaluation, emitted on every activation/exit/value-refresh trigger even when",
+        "the outcome leaves the blank set unchanged."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "n_real",
+            "type": "u32"
+          },
+          {
+            "name": "w_real",
+            "type": "u128"
+          },
+          {
+            "name": "blanks_before",
+            "type": {
+              "array": [
+                "u32",
+                3
+              ]
+            }
+          },
+          {
+            "name": "blanks_after",
+            "type": {
+              "array": [
+                "u32",
+                3
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "RollBatch",
+      "docs": [
+        "One roll batch: the account the whole roll pipeline writes to.",
+        "Seeds: `[BATCH_SEED, pool, batch_id: u64 le]`.",
+        "",
+        "**Field order is the on-chain byte layout and is append-only from the moment this ships.**",
+        "Everything downstream of `commit_rolls` decodes this account positionally."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "roller",
+            "type": "pubkey"
+          },
+          {
+            "name": "batch_id",
+            "type": "u64"
+          },
+          {
+            "name": "state",
+            "type": {
+              "defined": {
+                "name": "BatchState"
+              }
+            }
+          },
+          {
+            "name": "n",
+            "type": "u8"
+          },
+          {
+            "name": "next_roll",
+            "type": "u8"
+          },
+          {
+            "name": "settled",
+            "type": "u8"
+          },
+          {
+            "name": "refunded",
+            "type": "u8"
+          },
+          {
+            "name": "request_slot",
+            "docs": [
+              "Timeout anchor for the 240-slot recovery window (D-003, INV-48)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "caller_seed",
+            "docs": [
+              "The batch PDA's own bytes, passed as the VRF request's `callback_args` — the globally",
+              "unique key `recover_batch`'s queue scan matches on."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "randomness",
+            "docs": [
+              "Written exactly once, by the callback (INV-09). One 32-byte value expands to all `n`",
+              "draws through the roll index `k` (INV-49), so there is one VRF request per batch",
+              "regardless of `n` (D-010c, AC-55)."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "expected_w",
+            "docs": [
+              "INV-57's running expectation, seeded from live state by `vrf_callback` alongside",
+              "`randomness` (D-155). Each `settle_roll` asserts `current == expected` *before* drawing,",
+              "then rewrites both from its own draw and rebalance.",
+              "",
+              "**Not a commitment snapshot.** Equality with the value at callback time would be the wrong",
+              "assertion: the pipeline legitimately moves `W` between rolls (D-010a), so a snapshot form",
+              "would fail the batch at roll 1. A batch-local running expectation passes on the batch's own",
+              "mutations and fails on everything else, which is exactly INV-57's claim. Widths track",
+              "`RollRecord`'s `w_at_draw` and `blanks_at_draw` so the assert compares like with like."
+            ],
+            "type": "u128"
+          },
+          {
+            "name": "expected_blanks",
+            "type": {
+              "array": [
+                "u32",
+                3
+              ]
+            }
+          },
+          {
+            "name": "s_price",
+            "docs": [
+              "Economic terms snapshotted at commitment (INV-51); the buyback rate is deliberately absent",
+              "(D-006). **No `s_W`**: D-057 closed as option B, so the draw reduces over live `W` rather",
+              "than a range pinned here, and live `W` is the modulus third parties reproduce (AC-55)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "s_ticket",
+            "type": "u64"
+          },
+          {
+            "name": "s_fee",
+            "type": "u64"
+          },
+          {
+            "name": "s_alloc_bps",
+            "type": {
+              "array": [
+                "u16",
+                3
+              ]
+            }
+          },
+          {
+            "name": "s_blank_faces",
+            "type": {
+              "array": [
+                "u64",
+                3
+              ]
+            }
+          },
+          {
+            "name": "rolls",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "RollRecord"
+                  }
+                },
+                10
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RollOutcome",
+      "docs": [
+        "What a settled roll drew. `None` is the value a `Pending` or `Refunded` roll carries — a",
+        "refunded roll has no outcome, which is distinct from having drawn a blank.",
+        "",
+        "Declaration order is the wire byte — see [`BatchState`]."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "None"
+          },
+          {
+            "name": "RealCard"
+          },
+          {
+            "name": "Blank"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RollRecord",
+      "docs": [
+        "One roll's commitment and result, inlined ten times into [`RollBatch`].",
+        "",
+        "The draw inputs are persisted rather than recomputed because INV-10 requires a third party to",
+        "re-derive the result from the batch account and position history alone, and AC-55 requires the",
+        "expansion to be reproducible verbatim. `w_at_draw`, `n_real_at_draw` and `blanks_at_draw` are",
+        "the pool snapshot *at that draw*, which is not the snapshot at commitment: the pipeline removes",
+        "the drawn position and rebalances between rolls (D-010a), so every roll after the first sees a",
+        "different pool.",
+        "",
+        "This struct has no `Default` impl on purpose — `RollBatch` zeroes its array explicitly at",
+        "creation so the zero value is written where it can be read, not inferred from a trait."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "RollStatus"
+              }
+            }
+          },
+          {
+            "name": "outcome",
+            "type": {
+              "defined": {
+                "name": "RollOutcome"
+              }
+            }
+          },
+          {
+            "name": "selected_mint",
+            "docs": [
+              "Real-card result. `Pubkey::default()` when the roll drew a blank or has not settled."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "blank_face_idx",
+            "docs": [
+              "Blank result: index into the batch's snapshotted `s_blank_faces`."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "draw_value",
+            "docs": [
+              "`r`, persisted for INV-10 re-derivation."
+            ],
+            "type": "u128"
+          },
+          {
+            "name": "attempts",
+            "docs": [
+              "Rejection-sampling attempts used, persisted per SD-5 so the fallback branch is visible."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "w_at_draw",
+            "type": "u128"
+          },
+          {
+            "name": "n_real_at_draw",
+            "type": "u32"
+          },
+          {
+            "name": "blanks_at_draw",
+            "type": {
+              "array": [
+                "u32",
+                3
+              ]
+            }
+          },
+          {
+            "name": "refund_reason",
+            "docs": [
+              "`0` = settled. Non-zero identifies which refund branch of the §7 matrix was taken."
+            ],
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RollRefunded",
+      "docs": [
+        "One roll returned to its roller instead of settling. No fee is split on a refunded roll, which",
+        "is why this event carries no split: the full ticket price goes back.",
+        "",
+        "`reason` is the non-zero refund branch, matching the code persisted on the roll's own record —",
+        "zero is reserved there for a settled roll and so never appears here."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "batch",
+            "type": "pubkey"
+          },
+          {
+            "name": "roll_index",
+            "type": "u8"
+          },
+          {
+            "name": "reason",
+            "type": "u16"
+          },
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RollSettled",
+      "docs": [
+        "One roll's terminal draw.",
+        "",
+        "**The draw inputs are published, not just persisted.** A third party must be able to",
+        "re-derive this roll's result from the event stream alone, and the pool state the draw reduced",
+        "over is not the state at commitment: the pipeline removes the drawn position and rebalances",
+        "between rolls, so every roll after the first sees a different `w_at_draw`, `n_real_at_draw`",
+        "and `blanks_at_draw`.",
+        "",
+        "**The fee split is published as its four destinations rather than as the two aggregates the",
+        "vault sees.** `fee_protocol` carries the integer remainder of the basis-point division, so",
+        "only the per-destination form lets a reader check the four against `s_fee` and confirm the",
+        "remainder landed where it is supposed to; the two aggregates are recoverable from these four",
+        "and are therefore not carried."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "batch",
+            "type": "pubkey"
+          },
+          {
+            "name": "roll_index",
+            "type": "u8"
+          },
+          {
+            "name": "outcome",
+            "type": {
+              "defined": {
+                "name": "RollOutcome"
+              }
+            }
+          },
+          {
+            "name": "selected_mint",
+            "docs": [
+              "`Pubkey::default()` when the roll drew a blank."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "blank_face_idx",
+            "docs": [
+              "Index into the batch's snapshotted `s_blank_faces`; meaningless on a real-card draw."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "draw_value",
+            "type": "u128"
+          },
+          {
+            "name": "attempts",
+            "type": "u8"
+          },
+          {
+            "name": "w_at_draw",
+            "type": "u128"
+          },
+          {
+            "name": "n_real_at_draw",
+            "type": "u32"
+          },
+          {
+            "name": "blanks_at_draw",
+            "type": {
+              "array": [
+                "u32",
+                3
+              ]
+            }
+          },
+          {
+            "name": "fee_equal",
+            "docs": [
+              "Stays in the vault as owed fees."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "fee_tier",
+            "docs": [
+              "Stays in the vault as owed fees."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "fee_protocol",
+            "docs": [
+              "Leaves the vault, and carries the basis-point division's integer remainder."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "fee_t04",
+            "docs": [
+              "Leaves the vault."
+            ],
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RollStatus",
+      "docs": [
+        "Whether one roll of a batch has reached a terminal, and which (AC-57, INV-12).",
+        "",
+        "Declaration order is the wire byte — see [`BatchState`]."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Settled"
+          },
+          {
+            "name": "Refunded"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RotationPhase",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Proposed"
+          },
+          {
+            "name": "Accepted"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SeizureKind",
+      "docs": [
+        "The observed cause of a third-party seizure, as `close_seized` established it.",
+        "",
+        "`Burned` and `Transferred` are both *gone*; `Frozen` and `Undecidable` both leave the card",
+        "present and in the vault, and the four are separate variants because the remedies differ — a",
+        "burn cannot be undone, while a freeze, a transfer-out and a plugin holding up the move are all",
+        "reversible by the authority that caused them.",
+        "",
+        "**`Undecidable` is the open-ended one, and it exists so the set does not have to be.** The",
+        "other three are facts: the account is gone, the owner is not the vault, a freeze flag is set.",
+        "This one is the absence of a fact — the asset's or its collection's plugin registry holds a",
+        "record whose effect on the `Transfer` lifecycle **this program cannot decide**: a `Royalties`",
+        "rule set that is an allow list or a deny list, an external `Oracle` or `LifecycleHook` adapter",
+        "that declares a Transfer check, an **asset-level** `BubblegumV2` plugin, or a `plugin_type`",
+        "byte a later `mpl-core` ships and this build has never heard of.",
+        "",
+        "**Each of those is narrower than the plugin it names, and the narrowing was paid for.** A",
+        "`Royalties` record with `rule_set: None` and a `BubblegumV2` record on a *collection* are both",
+        "`Clear`; classifying either by plugin type put every card in the production cohort on this",
+        "cause, where `close_seized` is permissionless. It is deliberately *not* a claim that the transfer will fail; it is the statement",
+        "that nothing here can promise it will succeed.",
+        "",
+        "**Which is why it is the one cause both of `core_asset.rs`'s gates admit.** The exits proceed",
+        "on it and get MPL Core's own verdict; `close_seized` accepts it as a cause. Enumerating",
+        "*decidable* gating mechanisms one at a time always leaves a position able to be refused by",
+        "both gates at once — unwithdrawable and uncloseable, holding live",
+        "`w_real` behind a card nobody can move. Enumerating the **inert** mechanisms instead and",
+        "defaulting the rest to this variant is what avoids that."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Burned"
+          },
+          {
+            "name": "Transferred"
+          },
+          {
+            "name": "Frozen"
+          },
+          {
+            "name": "Undecidable"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SweepBegun",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "sweep_epoch",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SweepEnded",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "sweep_epoch",
+            "type": "u64"
+          },
+          {
+            "name": "positions_updated",
+            "type": "u32"
+          },
+          {
+            "name": "last_sweep_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "T04CeilingOverflow",
+      "docs": [
+        "A blank's equal-share credit that would push Treasury 04 past its ceiling, with the excess",
+        "routed to protocol revenue instead. `amount` is the excess that was rerouted, not the whole",
+        "credit."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TierChanged",
+      "docs": [
+        "Tier membership change: the member removed (if any) and the member added (if any)."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "left",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "entered",
+            "type": {
+              "option": "pubkey"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TierEntry",
+      "docs": [
+        "A single ranked slot in `TopTier.entries`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "value",
+            "type": "u64"
+          },
+          {
+            "name": "activated_at",
+            "type": "i64"
+          },
+          {
+            "name": "position_id",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TopTier",
+      "docs": [
+        "Top-value ranking, sorted `value` desc, `activated_at` asc, `position_id` asc.",
+        "Seeds: `[TOP_TIER_SEED, pool]`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "len",
+            "type": "u8"
+          },
+          {
+            "name": "entries",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "TierEntry"
+                  }
+                },
+                20
+              ]
+            }
+          },
+          {
+            "name": "acc_tier",
+            "type": "u128"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ValueRecorded",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "old",
+            "type": "u64"
+          },
+          {
+            "name": "new",
+            "type": "u64"
+          },
+          {
+            "name": "observed_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VrfConfigChanged",
+      "docs": [
+        "The three fields move together rather than through `ConfigChanged`'s per-field form: they are",
+        "protocol-wide, not `Pool`-scoped, and `ConfigValue` has no `Pubkey` variant."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "old_vrf_program",
+            "type": "pubkey"
+          },
+          {
+            "name": "old_oracle_queue",
+            "type": "pubkey"
+          },
+          {
+            "name": "old_swap_pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "vrf_program",
+            "type": "pubkey"
+          },
+          {
+            "name": "oracle_queue",
+            "type": "pubkey"
+          },
+          {
+            "name": "swap_pool",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WalletStats",
+      "docs": [
+        "Per-wallet, per-pool rollup of active positions. Seeds:",
+        "`[WALLET_STATS_SEED, pool, owner]`."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "active_positions",
+            "type": "u32"
+          },
+          {
+            "name": "active_value",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WeightIndex",
+      "docs": [
+        "One pool's real-position weight index: a Fenwick range-sum tree over `FENWICK_CAPACITY`",
+        "leaves with a LIFO free-slot stack. Not a PDA — a pre-created keypair account pinned by",
+        "`Pool.weight_index`."
+      ],
+      "serialization": "bytemuck",
+      "repr": {
+        "kind": "c"
+      },
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_weight",
+            "type": "u64"
+          },
+          {
+            "name": "high_water",
+            "type": "u32"
+          },
+          {
+            "name": "free_count",
+            "type": "u32"
+          },
+          {
+            "name": "_padding",
+            "type": {
+              "array": [
+                "u8",
+                8
+              ]
+            }
+          },
+          {
+            "name": "tree",
+            "type": {
+              "array": [
+                "u64",
+                16384
+              ]
+            }
+          },
+          {
+            "name": "free_stack",
+            "type": {
+              "array": [
+                "u32",
+                16384
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Withdrawn",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "position",
+            "type": "pubkey"
+          },
+          {
+            "name": "depositor",
+            "type": "pubkey"
+          },
+          {
+            "name": "fees_paid",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

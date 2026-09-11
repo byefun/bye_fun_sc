@@ -1,0 +1,153 @@
+# Hermetic build / test / deploy for the bye.fun smart contract(s).
+#
+# All services share one image (`smart-contract`) built from ./Dockerfile.
+# The repo is bind-mounted at /work; Linux build state lives in named volumes so
+# host directories stay free of cross-arch artifacts.
+#
+# NOTE: this repo is a SCAFFOLD — programs/ is empty until the on-chain design
+# lands. The build/validator/test/deploy commands below reference the placeholder
+# program `bye_machine` and become runnable once that program exists. Keep the program
+# ID in `validator.command` in sync with Anchor.toml, scripts/constants.ts,
+# scripts/run-integration-tests.sh, and .github/workflows/deploy-devnet.yml.
+#
+# Quick reference:
+#   docker compose run --rm build                  # cargo build-sbf
+#   docker compose up -d validator                 # background test validator
+#   docker compose run --rm test                   # node --test against validator
+#   docker compose --profile deploy run --rm deploy-devnet
+#   docker compose --profile dev    run --rm shell
+
+x-image: &image
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: bye-fun/smart-contract:dev
+  platform: linux/amd64
+
+x-build-volumes: &build-volumes
+  - ./:/work
+  - cargo-registry:/root/.cargo/registry
+  - cargo-git:/root/.cargo/git
+  - solana-cache:/root/.cache/solana
+  - target:/work/target
+
+services:
+  validator:
+    # Anza's official Agave 4.x release binaries hard-assert io_uring_supported(),
+    # which Docker Desktop's seccomp profile blocks → validator crashes on boot.
+    # `beeman/solana-test-validator` builds Agave from source without that assertion,
+    # ships multi-arch (amd64+arm64) nightly images, and Just Works under seccomp.
+    image: beeman/solana-test-validator:4.0.3
+    container_name: bye-fun-validator
+    # Load the program at genesis so tests don't need a deploy step. Program ID is
+    # duplicated from Anchor.toml — keep both in sync if it ever changes.
+    depends_on:
+      build:
+        condition: service_completed_successfully
+    command:
+      [
+        "solana-test-validator",
+        "--reset",
+        "--quiet",
+        "--ledger", "/ledger",
+        "--rpc-port", "8899",
+        "--bpf-program",
+        "4exRPJN7N8MVZh37efYAkwnGGxoJKMVUARQqf7awmYkJ",
+        "/target/deploy/bye_machine.so",
+      ]
+    security_opt:
+      - seccomp=unconfined
+    volumes:
+      # The .so lives in the named `target` volume populated by `build`.
+      - target:/target:ro
+    # `--reset` wipes the ledger each boot, so persistence is pointless. tmpfs is
+    # owned by the runtime user (`solana` uid 1000 inside this image), which
+    # sidesteps the root-owned named-volume issue and is faster than disk.
+    # 2g matches typical test-validator ledger growth — Docker's default 64m
+    # OOM-kills the validator (exit 137) once snapshot/rocksdb writes start.
+    tmpfs:
+      - /ledger:uid=1000,gid=1000,size=2g
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent --output /dev/null --header 'Content-Type: application/json' --data '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"getHealth\"}' http://127.0.0.1:8899"]
+      interval: 3s
+      timeout: 2s
+      retries: 40
+      start_period: 5s
+
+  build:
+    <<: *image
+    # `testing` gates any test-only instructions used by integration tests.
+    # NEVER bake `testing` into the devnet/mainnet artifact — see deploy-devnet.
+    command: cargo build-sbf --features dev,testing --arch v3 --tools-version v1.54 --manifest-path programs/bye_machine/Cargo.toml
+    volumes: *build-volumes
+
+  test:
+    <<: *image
+    depends_on:
+      validator:
+        condition: service_healthy
+      build:
+        condition: service_completed_successfully
+    # Share the validator's network namespace so the test process reaches
+    # solana-test-validator at localhost:8899 with zero test-code changes.
+    network_mode: "service:validator"
+    volumes:
+      - ./:/work
+      - node-modules:/work/node_modules
+      - target:/work/target
+    # `--frozen-lockfile`: pnpm-lock.yaml IS committed, so CI-style installs must fail
+    # on drift rather than silently resolving a different tree.
+    # Pre-airdrop the admin keypair before running tests so admin-signed txs are not
+    # silently dropped at the banking stage on a fresh --reset validator.
+    command: >
+      bash -lc "
+        set -euo pipefail;
+        pnpm install --frozen-lockfile;
+        ADMIN_PUBKEY=\"$$(solana-keygen pubkey accounts/dev/deployer.json)\";
+        solana airdrop 1000 \"$$ADMIN_PUBKEY\" --url http://127.0.0.1:8899 > /dev/null;
+        pnpm test;
+        pnpm run test:integration
+      "
+
+  deploy-devnet:
+    <<: *image
+    profiles: ["deploy"]
+    env_file:
+      - .env.docker
+    volumes:
+      - ./:/work
+      - cargo-registry:/root/.cargo/registry
+      - cargo-git:/root/.cargo/git
+      - target:/work/target
+      - ${DEPLOYER_KEYPAIR_PATH:-./accounts/dev/deployer.json}:/run/secrets/deployer:ro
+      - ${PROGRAM_KEYPAIR_PATH:-./accounts/dev/bye_machine-keypair.json}:/run/secrets/program-keypair:ro
+    # Rebuild without `testing` so test-only instructions never ship to devnet/mainnet.
+    command: >
+      bash -lc "
+        set -euo pipefail;
+        cargo build-sbf --features dev --arch v3 --tools-version v1.54 --manifest-path programs/bye_machine/Cargo.toml;
+        cp /run/secrets/program-keypair target/deploy/bye_machine-keypair.json;
+        solana config set --url devnet --keypair /run/secrets/deployer;
+        solana program deploy target/deploy/bye_machine.so --program-id target/deploy/bye_machine-keypair.json
+      "
+
+  shell:
+    <<: *image
+    profiles: ["dev"]
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/work
+      - cargo-registry:/root/.cargo/registry
+      - cargo-git:/root/.cargo/git
+      - solana-cache:/root/.cache/solana
+      - target:/work/target
+      - node-modules:/work/node_modules
+    command: bash
+
+volumes:
+  cargo-registry:
+  cargo-git:
+  solana-cache:
+  target:
+  node-modules:
