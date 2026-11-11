@@ -1,0 +1,120 @@
+name: CI
+
+# Gates every pull request into develop, staging and main. Pushes are checked on the integration
+# branches only, so work-in-progress pushes to develop don't burn CI — but nothing reaches develop
+# unchecked, which is what makes a green run mean something.
+
+on:
+  push:
+    branches: [staging, main]
+  pull_request:
+    branches: [develop, staging, main]
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      # Matches the rustc inside platform-tools v1.54, which is what actually compiles the
+      # program (`cargo build-sbf --version` reports rustc 1.89.0). A lower host pin does not
+      # make the build stricter — it only makes these steps disagree with the shipped artifact,
+      # and Cargo.lock no longer resolves under one.
+      - name: Install Rust toolchain
+        run: rustup toolchain install 1.89.0 --profile minimal --component rustfmt,clippy
+
+      - name: Format check
+        run: cargo +1.89.0 fmt --all --check
+
+      - name: Clippy
+        run: cargo +1.89.0 clippy --all-targets --features dev -- -D warnings
+
+      - name: Unit tests
+        run: cargo +1.89.0 test -p bye_machine
+
+      # The VRF queue fixtures were captured under the devnet program id, so the tests pinned to
+      # them run only on the `dev` arm; the localnet arm above marks them ignored.
+      - name: Unit tests (devnet program id)
+        run: cargo +1.89.0 test -p bye_machine --features dev
+
+      # `testing` compiles in `test_resolve_batch`, which resolves a batch to caller-chosen
+      # randomness with no VRF signature. lib.rs refuses the combination; this proves the refusal
+      # is real rather than trusting that it is still there, and fails if the build SUCCEEDS.
+      - name: prod + testing must not compile
+        run: |
+          if cargo +1.89.0 check -p bye_machine --features prod,testing 2>/dev/null; then
+            echo "::error::--features prod,testing compiled. The mainnet artifact can now carry"
+            echo "::error::test_resolve_batch, which resolves a batch to randomness its caller"
+            echo "::error::chose with no VRF signature. Restore the compile_error in lib.rs."
+            exit 1
+          fi
+          echo "prod + testing is refused at compile time, as it must be."
+
+  # The artifact-level half of the same guard. The job above constrains a build's INPUTS; this one
+  # inspects what a build actually produces, which is the only thing a deploy can be wrong about.
+  # Both directions run together on purpose: the `present` case is the control proving the search
+  # finds the marker when it is there, without which an `absent` verdict means nothing.
+  shipped-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 4.0.3, matching the Dockerfile and README. `--arch v3` below does not
+      # exist before CLI 4.x — 2.1.0's build-sbf rejects it outright with "possible values: sbfv1,
+      # sbfv2", so every build in this job fails at argument parsing under an older CLI.
+      - name: Install Agave CLI
+        run: |
+          sh -c "$(curl -sSfL https://release.anza.xyz/v4.0.3/install)"
+          echo "$HOME/.local/share/solana/install/active_release/bin" >> "$GITHUB_PATH"
+
+      # `set -o pipefail` so a genuine build failure is not swallowed by `tee`. The build's own
+      # exit status cannot report a frame overflow — see scripts/check-frame-overflow.sh.
+      - name: Build with testing, and prove the marker is findable
+        run: |
+          set -o pipefail
+          cargo build-sbf --features dev,testing --arch v3 --tools-version v1.54 \
+            --manifest-path programs/bye_machine/Cargo.toml 2>&1 | tee build-testing.log
+          ./scripts/check-frame-overflow.sh build-testing.log
+          ./scripts/check-test-instruction.sh target/deploy/bye_machine.so present
+
+      - name: Build without testing, and prove the instruction is gone
+        run: |
+          set -o pipefail
+          cargo build-sbf --features dev --arch v3 --tools-version v1.54 \
+            --manifest-path programs/bye_machine/Cargo.toml 2>&1 | tee build-dev.log
+          ./scripts/check-frame-overflow.sh build-dev.log
+          ./scripts/check-test-instruction.sh target/deploy/bye_machine.so absent
+
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.6.1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Type-check
+        run: pnpm run typecheck
+
+      - name: Validator-free tests
+        # Tests that need a running validator live in tests/integration and run
+        # locally (`pnpm run test:localnet`) or in the Docker stack.
+        run: pnpm test

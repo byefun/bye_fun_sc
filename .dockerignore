@@ -1,0 +1,28 @@
+# Build artifacts (rebuilt inside the container)
+target/
+node_modules/
+test-ledger/
+.anchor/
+
+# Local environment / secrets
+.env
+.env.*
+
+# Git metadata
+.git/
+.gitignore
+.github/
+
+# Editor / OS noise
+.idea/
+.vscode/
+.DS_Store
+*.swp
+*.swo
+
+# Claude / AI tooling
+.claude/
+
+# cargo mutants / rustfmt output
+**/mutants.out*/
+**/*.rs.bk

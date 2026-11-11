@@ -1,0 +1,13 @@
+{
+  "pubkey": "USDCmintFixture1111111111111111111111111111",
+  "account": {
+    "lamports": 1461600,
+    "data": [
+      "AQAAALVHfqlEXZKEql21ARfPRPDTf6gPOVXW5u07Qp+ljA8hAAAAAAAAAAAGAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+      "base64"
+    ],
+    "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "executable": false,
+    "rentEpoch": 0
+  }
+}

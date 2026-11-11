@@ -1,0 +1,1886 @@
+[
+  {
+    "instruction": "activate_acquired",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "activate_acquired",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "activate_acquired",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "activate_acquired",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "activate_acquired",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "admit_collection",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "admit_collection",
+    "field": "pool_collection",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "approve_deposit",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "approve_deposit",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "approve_deposit",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "approve_deposit",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "approve_deposit",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "begin_sweep",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "claim_fee",
+    "field": "depositor_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_fee",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "claim_fee",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "claim_fee",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "claim_fee",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "claim_fee_to_escrow",
+    "field": "escrow",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "claim_fee_to_escrow",
+    "field": "escrow_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "claim_fee_to_escrow",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "claim_fee_to_escrow",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "claim_fee_to_escrow",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "claim_fee_to_escrow",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "depositor_token",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "depositor_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "depositor_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "master_edition",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "metadata",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "nft_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "position_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "claim_nft",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "claim_nft_core",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft_core",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft_core",
+    "field": "depositor_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "claim_nft_core",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "claim_nft_core",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "claim_nft_core",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "claim_nft_core",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "close_batch",
+    "field": "batch",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "close_batch",
+    "field": "roller",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "close_seized",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "close_seized",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "close_seized",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "close_seized",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "close_seized",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "close_seized",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "close_seized",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "close_seized",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "commit_rolls",
+    "field": "batch",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "commit_rolls",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "commit_rolls",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "commit_rolls",
+    "field": "roller_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "commit_rolls",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "commit_rolls",
+    "field": "usdc_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "consolidate_treasuries",
+    "field": "legacy_treasury_03",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "consolidate_treasuries",
+    "field": "legacy_treasury_04",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "consolidate_treasuries",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "consolidate_treasuries",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "Singleton"
+  },
+  {
+    "instruction": "consolidate_treasuries",
+    "field": "treasury_04",
+    "class": "State",
+    "anchor": "Singleton"
+  },
+  {
+    "instruction": "consolidate_treasuries",
+    "field": "usdc_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit",
+    "field": "depositor_token",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit",
+    "field": "depositor_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit",
+    "field": "master_edition",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit",
+    "field": "metadata",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit",
+    "field": "nft_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "deposit",
+    "field": "pool_collection",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit",
+    "field": "position",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "deposit",
+    "field": "position_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "deposit",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "deposit_core",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit_core",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit_core",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "deposit_core",
+    "field": "pool_collection",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "deposit_core",
+    "field": "position",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "deposit_core",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "deposit_core",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "end_sweep",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "escrow_deposit",
+    "field": "escrow",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "escrow_deposit",
+    "field": "escrow_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "escrow_deposit",
+    "field": "owner_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "escrow_withdraw",
+    "field": "escrow",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "escrow_withdraw",
+    "field": "escrow_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "escrow_withdraw",
+    "field": "owner_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "init_pool",
+    "field": "pool",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "init_pool",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "init_pool",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "init_pool",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "Singleton"
+  },
+  {
+    "instruction": "init_pool",
+    "field": "treasury_04",
+    "class": "State",
+    "anchor": "Singleton"
+  },
+  {
+    "instruction": "init_pool",
+    "field": "usdc_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "init_pool",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "loader_escrow",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "loader_escrow_vault",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "loader_wallet_stats",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "master_edition",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "metadata",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "nft_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "pool_collection",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "position",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "position_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "seller_token",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "seller_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "seller_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "t02_identity",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "loader_escrow",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "loader_escrow_vault",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "loader_wallet_stats",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "pool_collection",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "position",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "seller_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "t02_identity",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "instant_sell_core",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "migrate_pool",
+    "field": "pool",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "open_escrow",
+    "field": "escrow",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "open_escrow",
+    "field": "escrow_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "open_escrow",
+    "field": "usdc_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "record_value",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "record_value",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "record_value",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "record_value",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "record_value",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "recover_batch",
+    "field": "batch",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "recover_batch",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "recover_batch",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "recover_batch",
+    "field": "roller_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "reject_deposit",
+    "field": "position",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "return_rejected",
+    "field": "depositor",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected",
+    "field": "depositor_token",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected",
+    "field": "depositor_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected",
+    "field": "master_edition",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected",
+    "field": "metadata",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected",
+    "field": "nft_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected",
+    "field": "position",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "return_rejected",
+    "field": "position_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "return_rejected_core",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected_core",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected_core",
+    "field": "depositor",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "return_rejected_core",
+    "field": "position",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "return_rejected_core",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "set_escrow_armed",
+    "field": "escrow",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "set_pause",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "batch",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "bye_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "depositor",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "master_edition",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "metadata",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "nft_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "position",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "position_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "protocol_revenue",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "roller",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "roller_bye",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "roller_token",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "roller_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "roller_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "settlement_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "treasury_04",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "treasury_05",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "usdc_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "batch",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "depositor",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "position",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "protocol_revenue",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "roller",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "roller_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "settlement_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "treasury_04",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "treasury_05",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "settle_roll_core",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "sweep_t04_overflow",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "Singleton"
+  },
+  {
+    "instruction": "sweep_t04_overflow",
+    "field": "treasury_04",
+    "class": "State",
+    "anchor": "Singleton"
+  },
+  {
+    "instruction": "t02_claim_fee",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "t02_claim_fee",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "t02_claim_fee",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_claim_fee",
+    "field": "t02_identity",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_claim_fee",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_claim_fee",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "authority_token",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "authority_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "master_edition",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "metadata",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "nft_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "position_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "t02_identity",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_claim_nft",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft_core",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft_core",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_claim_nft_core",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "t02_claim_nft_core",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "t02_claim_nft_core",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_claim_nft_core",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_claim_nft_core",
+    "field": "t02_identity",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_claim_nft_core",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "authority_token",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "authority_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "master_edition",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "metadata",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "nft_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "pool_collection",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "position",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "position_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "t02_identity",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_deposit",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_deposit_core",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit_core",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit_core",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "t02_deposit_core",
+    "field": "pool_collection",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_deposit_core",
+    "field": "position",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_deposit_core",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_deposit_core",
+    "field": "t02_identity",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_deposit_core",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "authority_token",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "authority_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "master_edition",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "metadata",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "nft_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "position_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "t02_identity",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "t02_identity",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "treasury_03",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "t02_withdraw_core",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "test_resolve_batch",
+    "field": "batch",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "test_resolve_batch",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "update_bye_mint",
+    "field": "bye_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "update_config",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "update_config",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "update_protocol_revenue",
+    "field": "protocol_revenue",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "update_tier",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "update_tier",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "update_tier",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "vrf_callback",
+    "field": "batch",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "vrf_callback",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "depositor_token",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "depositor_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "depositor_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "master_edition",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "metadata",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "nft_mint",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "position_token_record",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "withdraw",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw_collection",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "withdraw_collection",
+    "field": "pool_collection",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "asset",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "collection",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "depositor_usdc",
+    "class": "TokenOrMetadata",
+    "anchor": "NotSeeded"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "pool",
+    "class": "State",
+    "anchor": "FullySelf"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "position",
+    "class": "State",
+    "anchor": "Partial"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "position_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "principal_vault",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "top_tier",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "wallet_stats",
+    "class": "State",
+    "anchor": "External"
+  },
+  {
+    "instruction": "withdraw_core",
+    "field": "weight_index",
+    "class": "State",
+    "anchor": "NotSeeded"
+  }
+]

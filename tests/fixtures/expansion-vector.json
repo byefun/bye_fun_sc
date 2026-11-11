@@ -1,0 +1,86 @@
+{
+  "$comment": "Published expansion vector for bye.fun's roll draw. h = sha256(randomness || k || a); x = the low 16 bytes of h read little-endian; bound = the largest multiple of w below 2^128; accept r = x mod w when x < bound, else retry with a+1; after 4 attempts reduce the last word regardless. `attempts` is a 1-based count, so the attempt byte on the deciding hash is `attempts - 1`. `w`, `r` are decimal strings because they exceed the range JSON numbers carry exactly. This file is the artifact an independent verifier is checked against; it is generated from the written formula, never from the program.",
+  "max_attempts": 4,
+  "cases": [
+    {
+      "name": "live-pool-first-attempt",
+      "note": "A realistic pool weight: 40 leaves at the admission floor plus 3/2/1 blanks. The rejection region here is about 2^-78 of the range, so acceptance is immediate.",
+      "randomness": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "k": 0,
+      "w": "7533333333320",
+      "r": "4029087020998",
+      "attempts": 1,
+      "fallback": false
+    },
+    {
+      "name": "live-pool-later-roll",
+      "note": "The same batch randomness and the same pool at roll 7 \u2014 the roll index is what separates the draws of one batch.",
+      "randomness": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "k": 7,
+      "w": "7533333333320",
+      "r": "4891402700856",
+      "attempts": 1,
+      "fallback": false
+    },
+    {
+      "name": "rejection-accepts-on-attempt-2",
+      "note": "A weight one past half the range: 2^128 mod w is w-2, so nearly half of all words are rejected and the sampler reaches a later attempt deterministically.",
+      "randomness": "0000000000000000000000000000000000000000000000000000000000000000",
+      "k": 5,
+      "w": "170141183460469231731687303715884105729",
+      "r": "99603910314983458594134591899983379966",
+      "attempts": 2,
+      "fallback": false
+    },
+    {
+      "name": "rejection-accepts-on-attempt-3",
+      "note": "A weight one past half the range: 2^128 mod w is w-2, so nearly half of all words are rejected and the sampler reaches a later attempt deterministically.",
+      "randomness": "0000000000000000000000000000000000000000000000000000000000000000",
+      "k": 0,
+      "w": "170141183460469231731687303715884105729",
+      "r": "94177691786624560734296856284353428388",
+      "attempts": 3,
+      "fallback": false
+    },
+    {
+      "name": "rejection-exhausts-the-cap",
+      "note": "Every one of the four attempts is rejected, so the last word is reduced regardless and the full cap is recorded.",
+      "randomness": "0000000000000000000000000000000000000000000000000000000000000000",
+      "k": 6,
+      "w": "170141183460469231731687303715884105729",
+      "r": "100068777245748693188140089274349849688",
+      "attempts": 4,
+      "fallback": true
+    },
+    {
+      "name": "weight-one",
+      "note": "A single unit of weight: 2^128 mod 1 is 0, there is no rejection region, and the only possible draw is 0.",
+      "randomness": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "k": 0,
+      "w": "1",
+      "r": "0",
+      "attempts": 1,
+      "fallback": false
+    },
+    {
+      "name": "weight-divides-the-range",
+      "note": "2^127 divides 2^128 exactly, so the acceptance bound is the whole range and no word can ever be rejected.",
+      "randomness": "5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a",
+      "k": 3,
+      "w": "170141183460469231731687303715884105728",
+      "r": "99955268002128457266777549965255867775",
+      "attempts": 1,
+      "fallback": false
+    },
+    {
+      "name": "weight-is-the-whole-range-less-one",
+      "note": "The largest weight a u128 can express. 2^128 mod w is 1, so exactly one word in 2^128 is rejected \u2014 the smallest possible rejection region.",
+      "randomness": "0101010101010101010101010101010101010101010101010101010101010101",
+      "k": 1,
+      "w": "340282366920938463463374607431768211455",
+      "r": "110793037030242450795603299477378474027",
+      "attempts": 1,
+      "fallback": false
+    }
+  ]
+}
